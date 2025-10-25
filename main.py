@@ -22,5 +22,38 @@ def insert_record():
     connection.commit()
     connection.close()
 
-insert_record()
+def select_all():
+    connection = sqlite3.connect("cinema.db")
+    cursor = connection.cursor()
+    cursor.execute("""
+    SELECT * FROM "seat"
+    """)
+    result = cursor.fetchall()
+    connection.close()
+    return result
+
+def select_specific_columns():
+    connection = sqlite3.connect("cinema.db")
+    cursor = connection.cursor()
+    cursor.execute("""
+    SELECT "seat_id", "price" FROM "seat"
+    """)
+    result = cursor.fetchall()
+    connection.close()
+    return result
+
+def select_with_condition():
+    connection = sqlite3.connect("cinema.db")
+    cursor = connection.cursor()
+    cursor.execute("""
+    SELECT "seat_id", "price" FROM "seat" WHERE "price">80
+    """)
+    result = cursor.fetchall()
+    connection.close()
+    return result
+
+#insert_record()
+#print(select_all())
+#print(select_specific_columns())
+print(select_with_condition())
 
